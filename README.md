@@ -1,6 +1,8 @@
 # Forest Soil Microbiome Analysis
 Comparative analysis of microbial communities in tropical and temperate forest soils, using 16S rRNA amplicon data from the [Earth Microbiome Project (EMP)](https://doi.org/10.1038/nature24621).
 
+---
+
 ## Portfolio Context
 
 This is Project 3 in a series of soil biogeochemistry portfolio projects I am building as part of my transition from nanotechnology into soil science.
@@ -12,6 +14,8 @@ This is Project 3 in a series of soil biogeochemistry portfolio projects I am bu
 
 More at [vinilegueuno.com/portfolio](https://vinilegueuno.com/portfolio) and [github.com/vinmk-git](https://github.com/vinmk-git).
 
+---
+
 ## Overview
 
 The central question: do tropical and temperate forest soils host measurably different microbial communities — and if so, how?
@@ -20,11 +24,15 @@ The fix_biom.ipynb Jupyter notebook loads the EMP Release 1 biom dataset, filter
 
 The R pipeline then loads OTU tables, taxonomy, and a phylogenetic tree, combines tropical and temperate soil datasets into a single phyloseq object, and runs alpha diversity, beta diversity, and differential abundance analyses.
 
+---
+
 ## Data
 
 All source data is from the EMP Release 1 dataset [1]
 
 Publicly available at: https://zenodo.org/records/890000
+
+---
 
 ## Data preparation (Python)
 
@@ -39,6 +47,8 @@ Before running the R pipeline, the raw EMP data needs to be extracted and reform
 | `taxonomy.tsv` | Taxonomy table for all OTUs (SILVA 123 reference) |
 | `silva_123.97_otus.tre` | Phylogenetic tree (from `emp_observation_info_cr_silva.tar.gz`) |
 
+---
+
 ## Dependencies
 
 ```r
@@ -47,6 +57,8 @@ install.packages(c("tidyverse", "ggplot2", "car", "ggpubr"))
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 BiocManager::install(c("phyloseq", "vegan", "DESeq2", "microbiome", "ggtree"))
 ```
+
+---
 
 ## R Pipeline
 
@@ -87,6 +99,8 @@ Group separation is tested with PERMANOVA (`adonis2`) on weighted UniFrac distan
 Differential abundance between biomes is assessed using DESeq2 on the **unrarefied** count table with a Wald test.
 DESeq2 handles its own normalisation internally.
 
+---
+
 ## Outputs
 
 | File | Description |
@@ -97,6 +111,8 @@ DESeq2 handles its own normalisation internally.
 | `wt_unifrac.png` | PCoA plot — weighted UniFrac |
 | `nmds_plot.png` | NMDS plot — Bray-Curtis |
 
+---
+
 ## Notes on methods
 
 A few decisions worth flagging explicitly:
@@ -104,6 +120,24 @@ A few decisions worth flagging explicitly:
 - **Rarefaction vs. DESeq2 normalisation:** rarefaction is used for alpha and beta diversity; DESeq2 uses the unrarefied table for its own normalisation. This is intentional and consistent with current best practice.
 - **558 read threshold:** chosen empirically from the per-sample read count distribution. Samples below this threshold were outliers with unusually low sequencing depth.
 - **Full EMP tree:** the full SILVA tree (~100,000 OTUs) is passed to phyloseq, which prunes it to the OTUs in the dataset. This avoids any manual filtering errors.
+
+---
+
+## A note on AI use
+
+I used Claude (Anthropic) during this project for debugging, helping with writing this README, and code review.
+The modelling decisions, data choices, and scientific interpretation are my own.
+
+---
+
+## About
+
+**vin ilegueuno kadiri** — PhD in Chemistry / Nanotechnology, Max Planck Institute for Intelligent Systems.
+Currently transitioning into soil biogeochemistry and building toward a postdoc in plant-soil-microbiome interactions.
+
+[vinilegueuno.com](https://vinilegueuno.com) · [LinkedIn](https://www.linkedin.com/in/vinilegueunokadiri/)
+
+---
 
 ## References
 
