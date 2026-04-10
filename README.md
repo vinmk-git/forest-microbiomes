@@ -126,7 +126,7 @@ A few decisions worth flagging explicitly:
 ## A note on AI use
 
 I used Claude (Anthropic) during this project for debugging, helping with writing this README, and code review.
-The modelling decisions, data choices, and scientific interpretation are my own.
+The decisions concerning statistical tests, pipeline design, and data choices, as well as their interpretation, are my own.
 
 ---
 
